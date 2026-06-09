@@ -1,0 +1,32 @@
+/* ── Income / Expense type toggle ──────────────────────────────────────────── */
+
+.type-toggle {
+  display: flex;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+}
+
+.type-btn {
+  flex: 1;
+  padding: 13px 16px;
+  border: none;
+  background: var(--surface);
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: var(--font-body);
+  transition: background 0.15s, color 0.15s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+.type-btn:disabled {
+  cursor: not-allowed;
+}
+
+.type-btn--income.active  { background: var(--accent); color: white; }
+.type-btn--expense.active { background: #dc2626;       color: white; }

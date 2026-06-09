@@ -1,0 +1,147 @@
+/* ── KPI summary grid ──────────────────────────────────────────────────────── */
+
+.kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+  margin-bottom: 32px;
+}
+
+.kpi-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 20px;
+  box-shadow: var(--shadow);
+}
+
+.kpi-card__icon {
+  font-size: 1.4rem;
+  margin-bottom: 8px;
+}
+
+.kpi-card__label {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  margin-bottom: 4px;
+}
+
+.kpi-card__value {
+  font-size: 1.3rem;
+  font-family: var(--font-display);
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.kpi-card__value--expense { color: #dc2626; }
+
+/* Loading skeleton */
+.skeleton {
+  height: 28px;
+  width: 70%;
+  border-radius: 6px;
+  background: linear-gradient(90deg, var(--border) 25%, #f0f0f0 50%, var(--border) 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.4s infinite;
+}
+
+/* ── Recent transactions card ──────────────────────────────────────────────── */
+
+.tx-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 24px;
+  box-shadow: var(--shadow);
+}
+
+.tx-card__title {
+  font-weight: 600;
+  font-size: 0.95rem;
+  margin-bottom: 16px;
+}
+
+.tx-card__loading {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  padding: 16px 0;
+}
+
+.tx-card__error {
+  color: var(--danger);
+  font-size: 0.9rem;
+  padding: 16px 0;
+}
+
+/* ── Transaction row ───────────────────────────────────────────────────────── */
+
+.tx-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.tx-item:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.tx-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 1rem;
+}
+
+.tx-icon--income  { background: var(--accent-light); color: var(--accent); }
+.tx-icon--expense { background: #fef2f2; color: #dc2626; }
+
+.tx-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.tx-description {
+  font-weight: 600;
+  font-size: 0.875rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.tx-meta {
+  display: flex;
+  gap: 8px;
+  margin-top: 3px;
+  align-items: center;
+}
+
+.tx-date {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+}
+
+.tx-badge {
+  font-size: 0.7rem;
+  background: var(--accent-light);
+  color: var(--accent);
+  border-radius: 4px;
+  padding: 1px 7px;
+  font-weight: 500;
+}
+
+.tx-amount {
+  font-weight: 600;
+  font-size: 0.875rem;
+  flex-shrink: 0;
+}
+
+.tx-amount--income  { color: var(--accent); }
+.tx-amount--expense { color: #dc2626; }

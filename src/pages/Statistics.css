@@ -1,0 +1,95 @@
+/* ── Chart card wrapper ────────────────────────────────────────────────────── */
+
+.chart-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 24px;
+  box-shadow: var(--shadow);
+}
+
+.chart-card--mb { margin-bottom: 16px; }
+
+.chart-card__title {
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  margin-bottom: 16px;
+}
+
+/* ── Page-level status messages ────────────────────────────────────────────── */
+
+.stats-loading { color: var(--text-secondary); margin: 40px 0; }
+.stats-error   { color: var(--danger);         margin: 40px 0; }
+
+/* ── Bottom two-column grid ────────────────────────────────────────────────── */
+
+.stats-bottom-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  align-items: start;
+}
+
+/* ── 6-month KPI summary (inside chart card) ───────────────────────────────── */
+
+.kpi-summary {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding-top: 8px;
+}
+
+.kpi-row__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 4px;
+}
+
+.kpi-row__label {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+}
+
+.kpi-row__value           { font-size: 0.9rem; font-weight: 600; }
+.kpi-row__value--income   { color: #1a5c3a; }
+.kpi-row__value--expense  { color: #dc2626; }
+
+.kpi-row__track {
+  height: 4px;
+  background: var(--accent-light);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.kpi-row__bar {
+  height: 100%;
+  border-radius: 2px;
+  /* Width is set via the --bar-pct CSS custom property from the component */
+  width: var(--bar-pct, 0%);
+}
+
+.kpi-row__bar--income  { background: #1a5c3a; }
+.kpi-row__bar--expense { background: #dc2626; }
+
+/* ── Savings rate callout ──────────────────────────────────────────────────── */
+
+.savings-divider {
+  border-top: 1px solid var(--border);
+  padding-top: 12px;
+  margin-top: 4px;
+}
+
+.savings-label {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  margin-bottom: 6px;
+}
+
+.savings-rate {
+  font-size: 2rem;
+  font-family: var(--font-display);
+  color: #1a5c3a;
+  font-weight: 600;
+}

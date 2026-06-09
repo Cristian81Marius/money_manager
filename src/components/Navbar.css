@@ -99,3 +99,9 @@
   color: white;
   border-color: var(--accent);
 }
+
+.navbar-right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}

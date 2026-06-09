@@ -13,7 +13,7 @@ export default function Navbar() {
           <span className="logo-text">MoneyManager</span>
         </span>
 
-        <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+        <div className="navbar-right">
           <ul className="navbar-links">
             <li><NavLink to="/" end>{t.nav.home}</NavLink></li>
             <li><NavLink to="/upload-statement">{t.nav.uploadStatement}</NavLink></li>
