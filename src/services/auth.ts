@@ -1,7 +1,7 @@
 // Auth service — login, register, logout.
 //
 // All functions are mock implementations. Replace the mock block in each with
-// the commented-out fetch call when the backend is ready.
+// the commented-out apiClient call when the backend is ready.
 
 export interface AuthUser {
   id: string;
@@ -51,13 +51,8 @@ export async function login(payload: LoginRequest): Promise<AuthUser> {
   };
 
   // --- REAL API -----------------------------------------------------------
-  // const res = await fetch('/api/auth/login', {
-  //   method: 'POST',
-  //   headers: { 'Content-Type': 'application/json' },
-  //   body: JSON.stringify(payload),
-  // });
-  // if (!res.ok) throw new Error(AUTH_ERRORS.INVALID_CREDENTIALS);
-  // return (await res.json()) as AuthUser;
+  // import { apiPostPublic } from './apiClient';   ← add to file imports
+  // return apiPostPublic<AuthUser>('/auth/login', payload);
 }
 
 export async function register(payload: RegisterRequest): Promise<AuthUser> {
@@ -77,18 +72,14 @@ export async function register(payload: RegisterRequest): Promise<AuthUser> {
   };
 
   // --- REAL API -----------------------------------------------------------
-  // const res = await fetch('/api/auth/register', {
-  //   method: 'POST',
-  //   headers: { 'Content-Type': 'application/json' },
-  //   body: JSON.stringify(payload),
-  // });
-  // if (!res.ok) throw new Error(AUTH_ERRORS.EMAIL_TAKEN);
-  // return (await res.json()) as AuthUser;
+  // import { apiPostPublic } from './apiClient';   ← add to file imports
+  // return apiPostPublic<AuthUser>('/auth/register', payload);
 }
 
 export async function logout(): Promise<void> {
   await new Promise(resolve => setTimeout(resolve, 200));
 
   // --- REAL API -----------------------------------------------------------
-  // await fetch('/api/auth/logout', { method: 'POST' });
+  // import { apiPost } from './apiClient';   ← add to file imports
+  // await apiPost('/auth/logout');
 }

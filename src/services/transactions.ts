@@ -2,7 +2,7 @@
 //
 // `addTransaction` is a mock that resolves after a short delay.
 // To connect to a real API, replace the mock block with the commented-out
-// fetch call at the bottom — types and call sites stay the same.
+// apiClient call at the bottom — types and call sites stay the same.
 
 /** Whether money entered or left the account. */
 export type TransactionType = 'income' | 'expense';
@@ -55,11 +55,6 @@ export async function addTransaction(
   };
 
   // --- REAL API (enable when the backend is ready) ------------------------
-  // const res = await fetch('/api/transactions', {
-  //   method: 'POST',
-  //   headers: { 'Content-Type': 'application/json' },
-  //   body: JSON.stringify(payload),
-  // });
-  // if (!res.ok) throw new Error(`Save failed with status ${res.status}`);
-  // return (await res.json()) as AddTransactionResponse;
+  // import { apiPost } from './apiClient';   ← add to file imports
+  // return apiPost<AddTransactionResponse>('/transactions', payload);
 }

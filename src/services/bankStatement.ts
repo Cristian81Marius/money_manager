@@ -2,8 +2,9 @@
 //
 // The backend is not available yet, so `uploadBankStatement` is a mock that
 // resolves after a short delay. When the real API is ready, replace the mock
-// block with the commented-out fetch call at the bottom — request/response
+// block with the commented-out apiClient call at the bottom — request/response
 // types and call sites do not need to change.
+
 
 /** Banks available for selection in the Upload Statement form. */
 export const BANKS = [
@@ -61,13 +62,11 @@ export async function uploadBankStatement(
   };
 
   // --- REAL API (enable when the backend is ready) ------------------------
-  // const body = new FormData();
-  // body.append('bank', payload.bank);
-  // if (payload.startDate) body.append('startDate', payload.startDate);
-  // if (payload.endDate) body.append('endDate', payload.endDate);
-  // body.append('file', payload.file);
-  //
-  // const res = await fetch('/api/statements/upload', { method: 'POST', body });
-  // if (!res.ok) throw new Error(`Upload failed with status ${res.status}`);
-  // return (await res.json()) as UploadBankStatementResponse;
+  // import { apiPostForm } from './apiClient';   ← add to file imports
+  // const form = new FormData();
+  // form.append('bank', payload.bank);
+  // if (payload.startDate) form.append('startDate', payload.startDate);
+  // if (payload.endDate)   form.append('endDate',   payload.endDate);
+  // form.append('file', payload.file);
+  // return apiPostForm<UploadBankStatementResponse>('/statements/upload', form);
 }

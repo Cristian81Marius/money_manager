@@ -1,7 +1,8 @@
 // Service layer for dashboard / home screen data.
 //
-// Replace getDashboardSummary with a real fetch call when the backend is ready.
-// The shape of DashboardSummary and Transaction is the contract the API should honour.
+// Replace the mock block in getDashboardSummary with the commented-out
+// apiClient call when the backend is ready.
+// The shape of DashboardSummary and Transaction is the contract the API must honour.
 
 export type TransactionType = 'income' | 'expense';
 
@@ -12,6 +13,12 @@ export interface Transaction {
   amount: number;
   date: string;     // ISO yyyy-mm-dd
   category: string;
+}
+
+/** Optional query parameters for the dashboard endpoint. */
+export interface DashboardQuery {
+  /** YYYY-MM — which month to use for income/expenses KPIs. Defaults to current month on the server. */
+  month?: string;
 }
 
 export interface DashboardSummary {
@@ -41,13 +48,12 @@ const MOCK_SUMMARY: DashboardSummary = {
   recentTransactions:  MOCK_RECENT_TRANSACTIONS,
 };
 
-export async function getDashboardSummary(): Promise<DashboardSummary> {
+export async function getDashboardSummary(query?: DashboardQuery): Promise<DashboardSummary> {
   // --- MOCK ---------------------------------------------------------------
   await new Promise((resolve) => setTimeout(resolve, 600));
   return MOCK_SUMMARY;
 
   // --- REAL API (enable when the backend is ready) ------------------------
-  // const res = await fetch('/api/dashboard');
-  // if (!res.ok) throw new Error(`Failed to load dashboard (${res.status})`);
-  // return (await res.json()) as DashboardSummary;
+  // import { apiGet } from './apiClient';   ← add to file imports
+  // return apiGet<DashboardSummary>('/dashboard', { month: query?.month });
 }

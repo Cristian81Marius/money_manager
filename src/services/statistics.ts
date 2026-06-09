@@ -1,7 +1,8 @@
 // Service layer for the Statistics page.
 //
-// Replace getStatistics with a real fetch call when the backend is ready.
-// monthIndex is 0-based (0 = Jan … 5 = Jun) so the UI can map it to a
+// Replace the mock block in getStatistics with the commented-out apiClient
+// call when the backend is ready.
+// monthIndex is 0-based (0 = Jan … 11 = Dec) so the UI can map it to a
 // locale-appropriate month label without storing strings in the API response.
 
 export interface MonthlyPoint {
@@ -13,6 +14,14 @@ export interface MonthlyPoint {
 export interface CategoryAmount {
   category: string;
   amount: number;
+}
+
+/** Optional query parameters for the statistics endpoint. */
+export interface StatisticsQuery {
+  /** YYYY-MM — start of the period (inclusive). Defaults to 6 months before toMonth. */
+  fromMonth?: string;
+  /** YYYY-MM — end of the period (inclusive). Defaults to the current month. */
+  toMonth?: string;
 }
 
 export interface StatisticsData {
@@ -49,7 +58,7 @@ const totalExpenses = MOCK_MONTHLY_TREND.reduce((s, m) => s + m.expenses, 0); //
 const netSavings    = totalIncome - totalExpenses;
 const savingsRate   = Math.round((netSavings / totalIncome) * 100);
 
-export async function getStatistics(): Promise<StatisticsData> {
+export async function getStatistics(query?: StatisticsQuery): Promise<StatisticsData> {
   // --- MOCK ---------------------------------------------------------------
   await new Promise((resolve) => setTimeout(resolve, 700));
   return {
@@ -62,7 +71,9 @@ export async function getStatistics(): Promise<StatisticsData> {
   };
 
   // --- REAL API (enable when the backend is ready) ------------------------
-  // const res = await fetch('/api/statistics');
-  // if (!res.ok) throw new Error(`Failed to load statistics (${res.status})`);
-  // return (await res.json()) as StatisticsData;
+  // import { apiGet } from './apiClient';   ← add to file imports
+  // return apiGet<StatisticsData>('/statistics', {
+  //   fromMonth: query?.fromMonth,
+  //   toMonth:   query?.toMonth,
+  // });
 }
