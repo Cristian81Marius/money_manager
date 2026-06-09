@@ -2,6 +2,7 @@ import { useRef, useState } from 'react';
 import './UploadStatement.css';
 import { BANKS, uploadBankStatement } from '../services/bankStatement';
 import { useLanguage } from '../i18n/LanguageContext';
+import Field from '../components/Field';
 
 const emptyForm = { bank: '', startDate: '', endDate: '', file: null };
 
@@ -154,11 +155,3 @@ export default function UploadStatement() {
   );
 }
 
-function Field({ label, children }) {
-  return (
-    <div className="form-field">
-      <label className="form-label">{label}</label>
-      {children}
-    </div>
-  );
-}

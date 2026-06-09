@@ -1,0 +1,9 @@
+/* Login-specific overrides — layout lives in shared.css (.auth-card, .auth-brand, etc.) */
+
+.login-title {
+  font-size: 1.5rem;
+  font-family: var(--font-display);
+  color: var(--accent);
+  text-align: center;
+  margin-bottom: 4px;
+}

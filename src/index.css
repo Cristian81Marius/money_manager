@@ -39,6 +39,15 @@ body {
   flex: 1;
 }
 
+/* Centered layout for auth pages (login, register) */
+.auth-page {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
 .page h1 {
   font-family: var(--font-display);
   font-size: 2rem;

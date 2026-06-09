@@ -105,3 +105,61 @@
   align-items: center;
   gap: 8px;
 }
+
+/* ── Authenticated user section ────────────────────────────────────────────── */
+
+.navbar-separator {
+  width: 1px;
+  height: 20px;
+  background: var(--border);
+  margin: 0 4px;
+}
+
+.navbar-user {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.navbar-avatar {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: var(--accent);
+  color: white;
+  font-size: 0.75rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.navbar-username {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--text-primary);
+  max-width: 120px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.btn-logout {
+  padding: 5px 12px;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+  background: transparent;
+  font-size: 0.8rem;
+  font-weight: 500;
+  cursor: pointer;
+  color: var(--text-secondary);
+  font-family: var(--font-body);
+  transition: background 0.15s, color 0.15s, border-color 0.15s;
+}
+
+.btn-logout:hover {
+  background: #fef2f2;
+  color: #dc2626;
+  border-color: #dc2626;
+}

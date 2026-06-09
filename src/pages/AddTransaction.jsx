@@ -2,6 +2,7 @@ import { useState } from 'react';
 import './AddTransaction.css';
 import { addTransaction } from '../services/transactions';
 import { useLanguage } from '../i18n/LanguageContext';
+import Field from '../components/Field';
 
 function todayISO() {
   const d = new Date();
@@ -192,11 +193,3 @@ export default function AddTransaction() {
   );
 }
 
-function Field({ label, children }) {
-  return (
-    <div className="form-field">
-      <label className="form-label">{label}</label>
-      {children}
-    </div>
-  );
-}

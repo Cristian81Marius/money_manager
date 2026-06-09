@@ -144,3 +144,97 @@
 .btn-secondary:hover {
   background: var(--accent-light);
 }
+
+/* Full-width variant — used in auth forms */
+.btn-primary--full {
+  width: 100%;
+  min-width: 0;
+}
+
+/* ── Auth card ─────────────────────────────────────────────────────────────── */
+
+.auth-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 40px;
+  box-shadow: var(--shadow);
+  width: 100%;
+  max-width: 420px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* ── Auth brand block (logo + app name + subtitle) ─────────────────────────── */
+
+.auth-brand {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 4px;
+}
+
+.auth-brand__icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  background: var(--accent);
+  color: white;
+  font-size: 1.4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.auth-brand__name {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  color: var(--accent);
+}
+
+.auth-brand__subtitle {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  text-align: center;
+}
+
+/* ── Auth form inner layout ────────────────────────────────────────────────── */
+
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* ── Footer link row ───────────────────────────────────────────────────────── */
+
+.auth-footer {
+  text-align: center;
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+}
+
+.auth-footer__link {
+  color: var(--accent);
+  font-weight: 600;
+  text-decoration: none;
+  margin-left: 4px;
+}
+
+.auth-footer__link:hover {
+  text-decoration: underline;
+}
+
+/* ── Demo credentials hint (visible only in mock/dev mode) ─────────────────── */
+
+.auth-demo-hint {
+  text-align: center;
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  background: var(--bg);
+  border: 1px dashed var(--border);
+  border-radius: 8px;
+  padding: 10px 14px;
+}
