@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import {
   ResponsiveContainer, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend,
   PieChart, Pie, Cell,
@@ -50,9 +50,21 @@ export default function Statistics() {
       .finally(() => setLoading(false));
   }, []);
 
+  // monthIndex from the API is 0-based from the server's fromMonth (last 6 months by default).
+  // Compute the actual month labels from the current date to match that window.
+  const monthLabels = useMemo(() => {
+    const locale = lang === 'ro' ? 'ro-RO' : 'en-US';
+    const fmt = new Intl.DateTimeFormat(locale, { month: 'short' });
+    const now = new Date();
+    return Array.from({ length: 6 }, (_, i) => {
+      const d = new Date(now.getFullYear(), now.getMonth() - 5 + i, 1);
+      return fmt.format(d);
+    });
+  }, [lang]);
+
   const chartData = stats
     ? stats.monthlyTrend.map(point => ({
-        month:    s.months[point.monthIndex],
+        month:    monthLabels[point.monthIndex],
         income:   point.income,
         expenses: point.expenses,
       }))

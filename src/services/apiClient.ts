@@ -8,12 +8,10 @@
 //
 // Base URL resolution order:
 //   1. VITE_API_BASE_URL environment variable (set in .env.local or CI)
-//   2. '/api/v1'  →  forwarded to http://localhost:8080 by the Vite dev proxy
-//      (see vite.config.js)
+//   2. '/api/v1'  →  forwarded to http://localhost:5081 by the Vite dev proxy
 
 const STORAGE_KEY = 'mm_user';
 
-// TODO: create .env.local and add  VITE_API_BASE_URL=http://localhost:8080/api/v1
 export const BASE_URL: string =
   import.meta.env.VITE_API_BASE_URL ?? '/api/v1';
 

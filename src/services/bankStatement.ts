@@ -1,12 +1,5 @@
-// Service layer for uploading bank statements.
-//
-// The backend is not available yet, so `uploadBankStatement` is a mock that
-// resolves after a short delay. When the real API is ready, replace the mock
-// block with the commented-out apiClient call at the bottom — request/response
-// types and call sites do not need to change.
+import { apiPostForm } from './apiClient';
 
-
-/** Banks available for selection in the Upload Statement form. */
 export const BANKS = [
   'BCR',
   'BRD',
@@ -20,53 +13,26 @@ export const BANKS = [
 
 export type Bank = (typeof BANKS)[number];
 
-/** Payload sent to the API when importing a bank statement. */
 export interface UploadBankStatementRequest {
   bank: Bank;
-  /** ISO date (yyyy-mm-dd). When provided, only import transactions from this date onward. */
   startDate?: string;
-  /** ISO date (yyyy-mm-dd). When provided, only import transactions up to this date. */
   endDate?: string;
   file: File;
 }
 
-/** Shape returned by the API after a successful import. */
 export interface UploadBankStatementResponse {
   statementId: string;
   bank: Bank;
   importedCount: number;
 }
 
-const MOCK_DELAY_MS = 1200;
-
-/**
- * Upload a bank statement file for parsing and import.
- *
- * Placeholder: simulates network latency and returns a fake response.
- * Replace the mock block with the real fetch call once the backend is ready.
- */
 export async function uploadBankStatement(
   payload: UploadBankStatementRequest,
 ): Promise<UploadBankStatementResponse> {
-  if (!payload.file) {
-    throw new Error('A file is required to upload a statement.');
-  }
-
-  // --- MOCK ---------------------------------------------------------------
-  await new Promise((resolve) => setTimeout(resolve, MOCK_DELAY_MS));
-
-  return {
-    statementId: `mock-${payload.bank.toLowerCase()}-${payload.file.name}`,
-    bank: payload.bank,
-    importedCount: (payload.file.size % 50) + 1,
-  };
-
-  // --- REAL API (enable when the backend is ready) ------------------------
-  // import { apiPostForm } from './apiClient';   ← add to file imports
-  // const form = new FormData();
-  // form.append('bank', payload.bank);
-  // if (payload.startDate) form.append('startDate', payload.startDate);
-  // if (payload.endDate)   form.append('endDate',   payload.endDate);
-  // form.append('file', payload.file);
-  // return apiPostForm<UploadBankStatementResponse>('/statements/upload', form);
+  const form = new FormData();
+  form.append('bank', payload.bank);
+  if (payload.startDate) form.append('startDate', payload.startDate);
+  if (payload.endDate)   form.append('endDate',   payload.endDate);
+  form.append('file', payload.file);
+  return apiPostForm<UploadBankStatementResponse>('/statements/upload', form);
 }
