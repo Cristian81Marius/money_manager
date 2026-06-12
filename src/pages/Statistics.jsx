@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState } from 'react';
+import { useTheme } from '../context/ThemeContext';
 import {
   ResponsiveContainer, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend,
   PieChart, Pie, Cell,
@@ -8,14 +9,10 @@ import { getStatistics } from '../services/statistics';
 import { useLanguage } from '../i18n/LanguageContext';
 import { INCOME_COLOR, EXPENSE_COLOR, CATEGORY_COLORS } from '../styles/colors';
 
-// Recharts requires style configuration as plain JS objects — these cannot be
-// expressed as CSS classes since they are passed as library API props, not as
-// HTML element style attributes.
-const TOOLTIP_STYLE = { borderRadius: 8, border: '1px solid #E2E6EC', fontSize: 13 };
-const TOOLTIP_CURSOR = { fill: '#F7F8FA' };
-const LEGEND_STYLE = { fontSize: 13 };
+// Recharts library API props — cannot be expressed as CSS classes.
+// Size/spacing constants are theme-independent and stay at module level.
+const LEGEND_STYLE     = { fontSize: 13 };
 const PIE_LEGEND_STYLE = { fontSize: 12, paddingTop: 8 };
-const AXIS_TICK = { fontSize: 12, fill: '#6B7280' };
 
 function formatRON(amount, lang) {
   return (
@@ -37,7 +34,15 @@ function formatRONFull(amount, lang) {
 
 export default function Statistics() {
   const { t, lang } = useLanguage();
+  const { theme }   = useTheme();
   const s = t.statistics;
+
+  // Recharts color props that depend on theme — must be inside the component.
+  const isDark       = theme === 'dark';
+  const AXIS_TICK    = { fontSize: 12, fill: isDark ? '#8b95aa' : '#6B7280' };
+  const TOOLTIP_STYLE  = { borderRadius: 8, border: `1px solid ${isDark ? '#2d3448' : '#E2E6EC'}`, fontSize: 13, backgroundColor: isDark ? '#1a1e2b' : '#ffffff' };
+  const TOOLTIP_CURSOR = { fill: isDark ? '#2d3448' : '#F7F8FA' };
+  const GRID_COLOR     = isDark ? '#2d3448' : '#E2E6EC';
 
   const [stats, setStats]     = useState(null);
   const [loading, setLoading] = useState(true);
@@ -83,7 +88,7 @@ export default function Statistics() {
           <ChartCard title={s.monthlyOverview} className="chart-card--mb">
             <ResponsiveContainer width="100%" height={280}>
               <BarChart data={chartData} barCategoryGap="30%" barGap={4}>
-                <CartesianGrid strokeDasharray="3 3" stroke="#E2E6EC" vertical={false} />
+                <CartesianGrid strokeDasharray="3 3" stroke={GRID_COLOR} vertical={false} />
                 <XAxis dataKey="month" tick={AXIS_TICK} axisLine={false} tickLine={false} />
                 <YAxis tickFormatter={v => `${(v / 1000).toFixed(0)}k`} tick={AXIS_TICK} axisLine={false} tickLine={false} />
                 <Tooltip formatter={v => formatRON(v, lang)} contentStyle={TOOLTIP_STYLE} cursor={TOOLTIP_CURSOR} />

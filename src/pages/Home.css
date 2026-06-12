@@ -33,14 +33,14 @@
   font-weight: 600;
 }
 
-.kpi-card__value--expense { color: #dc2626; }
+.kpi-card__value--expense { color: var(--danger); }
 
 /* Loading skeleton */
 .skeleton {
   height: 28px;
   width: 70%;
   border-radius: 6px;
-  background: linear-gradient(90deg, var(--border) 25%, #f0f0f0 50%, var(--border) 75%);
+  background: linear-gradient(90deg, var(--border) 25%, var(--bg) 50%, var(--border) 75%);
   background-size: 200% 100%;
   animation: shimmer 1.4s infinite;
 }
@@ -101,7 +101,8 @@
 }
 
 .tx-icon--income  { background: var(--accent-light); color: var(--accent); }
-.tx-icon--expense { background: #fef2f2; color: #dc2626; }
+.tx-icon--expense { background: #fef2f2; color: var(--danger); }
+[data-theme="dark"] .tx-icon--expense { background: #2d1515; }
 
 .tx-info {
   flex: 1;
@@ -144,4 +145,4 @@
 }
 
 .tx-amount--income  { color: var(--accent); }
-.tx-amount--expense { color: #dc2626; }
+.tx-amount--expense { color: var(--danger); }

@@ -2,7 +2,8 @@
   "permissions": {
     "allow": [
       "Bash(npx tsc *)",
-      "Bash(npx vite *)"
+      "Bash(npx vite *)",
+      "Bash(grep -n \"#[0-9a-fA-F]\\\\{3,6\\\\}\" src/pages/Home.css src/pages/AddTransaction.css src/pages/UploadStatement.css src/pages/Statistics.css src/pages/Login.css)"
     ]
   }
 }

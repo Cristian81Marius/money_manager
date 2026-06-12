@@ -19,6 +19,19 @@
   --shadow: 0 1px 4px rgba(0,0,0,0.07);
 }
 
+[data-theme="dark"] {
+  --bg:             #0f1117;
+  --surface:        #1a1e2b;
+  --border:         #2d3448;
+  --text-primary:   #e6eaf4;
+  --text-secondary: #8b95aa;
+  --accent:         #22c55e;
+  --accent-light:   #0d2318;
+  --accent-mid:     #16a34a;
+  --danger:         #ef4444;
+  --shadow:         0 1px 4px rgba(0,0,0,0.35);
+}
+
 body {
   font-family: var(--font-body);
   background: var(--bg);
@@ -77,6 +90,11 @@ body {
 .placeholder-card .icon {
   font-size: 1.8rem;
   opacity: 0.5;
+}
+
+@keyframes dropdown-in {
+  from { opacity: 0; transform: translateY(-6px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
 
 @keyframes shimmer {

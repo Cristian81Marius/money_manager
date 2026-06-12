@@ -32,6 +32,7 @@ export const translations = {
       loadingButton: 'Uploading…',
       uploadAnother: 'Upload Another',
       errorNoBank: 'Please select a bank.',
+      errorLoadingBanks: 'Failed to load bank list.',
       errorNoFile: 'Please choose a file before continuing.',
       errorDateRange: 'Start date cannot be after end date.',
       successMessage: 'Statement uploaded successfully.',
@@ -62,6 +63,7 @@ export const translations = {
       errorInvalidAmount: 'Amount must be greater than zero.',
       errorNoDate: 'Please select a date.',
       errorNoCategory: 'Please select a category.',
+      errorLoadingCategories: 'Failed to load categories.',
       successMessage: 'Transaction saved successfully.',
     },
     statistics: {
@@ -79,6 +81,11 @@ export const translations = {
       months: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
       loading: 'Loading…',
       errorLoading: 'Failed to load statistics.',
+    },
+    profile: {
+      changePhoto: 'Change photo',
+      light: 'Light',
+      dark: 'Dark',
     },
     auth: {
       loginTitle: 'Sign In',
@@ -107,7 +114,6 @@ export const translations = {
       errorPasswordMismatch: 'Passwords do not match.',
       errorPasswordTooShort: 'Password must be at least 6 characters.',
       errorRequiredFields: 'Please fill in all required fields.',
-      demoHint: 'Demo: demo@moneymanager.ro / demo123',
     },
   },
 
@@ -144,6 +150,7 @@ export const translations = {
       loadingButton: 'Se încarcă…',
       uploadAnother: 'Încarcă altul',
       errorNoBank: 'Selectează banca.',
+      errorLoadingBanks: 'Eroare la încărcarea băncilor.',
       errorNoFile: 'Alege un fișier înainte de a continua.',
       errorDateRange: 'Data de început nu poate fi după data de sfârșit.',
       successMessage: 'Extrasul a fost încărcat cu succes.',
@@ -174,6 +181,7 @@ export const translations = {
       errorInvalidAmount: 'Suma trebuie să fie mai mare ca zero.',
       errorNoDate: 'Selectează data.',
       errorNoCategory: 'Selectează o categorie.',
+      errorLoadingCategories: 'Eroare la încărcarea categoriilor.',
       successMessage: 'Tranzacția a fost salvată cu succes.',
     },
     statistics: {
@@ -191,6 +199,11 @@ export const translations = {
       months: ['Ian', 'Feb', 'Mar', 'Apr', 'Mai', 'Iun'],
       loading: 'Se încarcă…',
       errorLoading: 'Eroare la încărcarea statisticilor.',
+    },
+    profile: {
+      changePhoto: 'Schimbă poza',
+      light: 'Luminos',
+      dark: 'Întunecat',
     },
     auth: {
       loginTitle: 'Autentificare',
@@ -219,7 +232,6 @@ export const translations = {
       errorPasswordMismatch: 'Parolele nu coincid.',
       errorPasswordTooShort: 'Parola trebuie să aibă cel puțin 6 caractere.',
       errorRequiredFields: 'Completează toate câmpurile obligatorii.',
-      demoHint: 'Demo: demo@moneymanager.ro / demo123',
     },
   },
 };

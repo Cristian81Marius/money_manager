@@ -100,8 +100,6 @@ export default function Login() {
           </button>
         </form>
 
-        <p className="auth-demo-hint">{a.demoHint}</p>
-
         <p className="auth-footer">
           {a.noAccount}
           <Link to="/register" className="auth-footer__link">{a.registerLink}</Link>

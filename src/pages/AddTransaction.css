@@ -29,4 +29,4 @@
 }
 
 .type-btn--income.active  { background: var(--accent); color: white; }
-.type-btn--expense.active { background: #dc2626;       color: white; }
+.type-btn--expense.active { background: var(--danger);  color: white; }

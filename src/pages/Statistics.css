@@ -53,8 +53,8 @@
 }
 
 .kpi-row__value           { font-size: 0.9rem; font-weight: 600; }
-.kpi-row__value--income   { color: #1a5c3a; }
-.kpi-row__value--expense  { color: #dc2626; }
+.kpi-row__value--income   { color: var(--accent); }
+.kpi-row__value--expense  { color: var(--danger); }
 
 .kpi-row__track {
   height: 4px;
@@ -70,8 +70,8 @@
   width: var(--bar-pct, 0%);
 }
 
-.kpi-row__bar--income  { background: #1a5c3a; }
-.kpi-row__bar--expense { background: #dc2626; }
+.kpi-row__bar--income  { background: var(--accent); }
+.kpi-row__bar--expense { background: var(--danger); }
 
 /* ── Savings rate callout ──────────────────────────────────────────────────── */
 
@@ -90,6 +90,6 @@
 .savings-rate {
   font-size: 2rem;
   font-family: var(--font-display);
-  color: #1a5c3a;
+  color: var(--accent);
   font-weight: 600;
 }

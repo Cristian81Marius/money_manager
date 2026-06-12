@@ -1,6 +1,6 @@
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import './UploadStatement.css';
-import { BANKS, uploadBankStatement } from '../services/bankStatement';
+import { getBanks, uploadBankStatement } from '../services/bankStatement';
 import { useLanguage } from '../i18n/LanguageContext';
 import Field from '../components/Field';
 
@@ -10,13 +10,21 @@ export default function UploadStatement() {
   const { t } = useLanguage();
   const s = t.uploadStatement;
 
-  const [form, setForm]     = useState(emptyForm);
-  const [status, setStatus] = useState('idle'); // 'idle' | 'loading' | 'success' | 'error'
-  const [error, setError]   = useState('');
-  const [result, setResult] = useState(null);
-  const fileInputRef        = useRef(null);
+  const [form, setForm]       = useState(emptyForm);
+  const [status, setStatus]   = useState('idle');
+  const [error, setError]     = useState('');
+  const [result, setResult]   = useState(null);
+  const [banks, setBanks]     = useState([]);
+  const [banksError, setBanksError] = useState('');
+  const fileInputRef           = useRef(null);
 
   const isLoading = status === 'loading';
+
+  useEffect(() => {
+    getBanks()
+      .then(setBanks)
+      .catch(() => setBanksError(s.errorLoadingBanks));
+  }, []);
 
   function updateField(name, value) {
     setForm(prev => ({ ...prev, [name]: value }));
@@ -40,10 +48,10 @@ export default function UploadStatement() {
 
     try {
       const response = await uploadBankStatement({
-        bank: form.bank,
+        bankId:    form.bank,
         startDate: form.startDate || undefined,
         endDate:   form.endDate   || undefined,
-        file: form.file,
+        file:      form.file,
       });
       setResult(response);
       setStatus('success');
@@ -69,16 +77,21 @@ export default function UploadStatement() {
       <form onSubmit={handleSubmit} className="form-card">
 
         <Field label={s.bankLabel}>
-          <select
-            value={form.bank}
-            onChange={e => updateField('bank', e.target.value)}
-            disabled={isLoading}
-            required
-            className={`form-input${!form.bank ? ' form-input--unselected' : ''}`}
-          >
-            <option value="">{s.bankPlaceholder}</option>
-            {BANKS.map(bank => <option key={bank} value={bank}>{bank}</option>)}
-          </select>
+          {banksError
+            ? <p className="feedback feedback--error">{banksError}</p>
+            : (
+              <select
+                value={form.bank}
+                onChange={e => updateField('bank', e.target.value)}
+                disabled={isLoading || banks.length === 0}
+                required
+                className={`form-input${!form.bank ? ' form-input--unselected' : ''}`}
+              >
+                <option value="">{s.bankPlaceholder}</option>
+                {banks.map(b => <option key={b.id} value={b.id}>{b.name}</option>)}
+              </select>
+            )
+          }
         </Field>
 
         <div className="form-row">
@@ -154,4 +167,3 @@ export default function UploadStatement() {
     </div>
   );
 }
-

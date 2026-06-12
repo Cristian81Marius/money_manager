@@ -4,7 +4,14 @@ import { translations } from './translations';
 const LanguageContext = createContext(null);
 
 export function LanguageProvider({ children }) {
-  const [lang, setLang] = useState('en');
+  const [lang, setLangState] = useState(
+    () => localStorage.getItem('mm_lang') ?? 'en',
+  );
+
+  function setLang(l) {
+    setLangState(l);
+    localStorage.setItem('mm_lang', l);
+  }
 
   return (
     <LanguageContext.Provider value={{ t: translations[lang], lang, setLang }}>

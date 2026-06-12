@@ -51,9 +51,14 @@
   line-height: 1.5;
 }
 
+[data-theme="dark"] .form-input,
+[data-theme="dark"] .form-textarea {
+  background: #13172a;
+}
+
 /* Colour modifiers for amount inputs */
-.form-input--income  { color: #1a5c3a; }
-.form-input--expense { color: #dc2626; }
+.form-input--income  { color: var(--accent); }
+.form-input--expense { color: var(--danger); }
 
 /* Dimmed colour for an unselected <select> */
 .form-input--unselected { color: var(--text-secondary); }
@@ -86,6 +91,7 @@
 }
 
 .feedback--error   { background: #fef2f2; color: var(--danger); }
+[data-theme="dark"] .feedback--error { background: #2d1515; }
 .feedback--success { background: var(--accent-light); color: var(--accent); }
 
 .feedback__detail {
@@ -227,14 +233,3 @@
   text-decoration: underline;
 }
 
-/* ── Demo credentials hint (visible only in mock/dev mode) ─────────────────── */
-
-.auth-demo-hint {
-  text-align: center;
-  font-size: 0.8rem;
-  color: var(--text-secondary);
-  background: var(--bg);
-  border: 1px dashed var(--border);
-  border-radius: 8px;
-  padding: 10px 14px;
-}

@@ -93,6 +93,18 @@ export async function apiGet<T>(
 }
 
 /**
+ * Authenticated PATCH request with a JSON body.
+ */
+export async function apiPatch<T>(path: string, body?: unknown): Promise<T> {
+  const res = await fetch(`${BASE_URL}${path}`, {
+    method: 'PATCH',
+    headers: bearerHeaders(true),
+    body:    body !== undefined ? JSON.stringify(body) : undefined,
+  });
+  return handleResponse<T>(res);
+}
+
+/**
  * Authenticated POST request with a JSON body.
  */
 export async function apiPost<T>(path: string, body?: unknown): Promise<T> {

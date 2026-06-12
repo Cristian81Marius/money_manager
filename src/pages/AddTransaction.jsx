@@ -1,6 +1,7 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import './AddTransaction.css';
 import { addTransaction } from '../services/transactions';
+import { getCategories } from '../services/categories';
 import { useLanguage } from '../i18n/LanguageContext';
 import Field from '../components/Field';
 
@@ -15,17 +16,24 @@ export default function AddTransaction() {
   const { t } = useLanguage();
   const a = t.addTransaction;
 
-  const [form, setForm]     = useState(emptyForm);
-  const [status, setStatus] = useState('idle'); // 'idle' | 'loading' | 'success' | 'error'
-  const [error, setError]   = useState('');
-  const [result, setResult] = useState(null);
+  const [form, setForm]         = useState(emptyForm);
+  const [status, setStatus]     = useState('idle');
+  const [error, setError]       = useState('');
+  const [result, setResult]     = useState(null);
+  const [categories, setCategories] = useState({ income: [], expense: [] });
+  const [catError, setCatError] = useState('');
 
-  const isLoading  = status === 'loading';
-  const categories = form.type === 'income' ? a.incomeCategories : a.expenseCategories;
+  const isLoading     = status === 'loading';
+  const categoryList  = form.type === 'income' ? categories.income : categories.expense;
+
+  useEffect(() => {
+    getCategories()
+      .then(setCategories)
+      .catch(() => setCatError(a.errorLoadingCategories));
+  }, []);
 
   function updateField(name, value) {
     if (name === 'type') {
-      // Reset category when type changes so a stale selection isn't submitted
       setForm(prev => ({ ...prev, type: value, category: '' }));
     } else {
       setForm(prev => ({ ...prev, [name]: value }));
@@ -143,15 +151,20 @@ export default function AddTransaction() {
         </div>
 
         <Field label={a.categoryLabel}>
-          <select
-            value={form.category}
-            onChange={e => updateField('category', e.target.value)}
-            disabled={isLoading || !form.type}
-            className={`form-input${!form.category ? ' form-input--unselected' : ''}`}
-          >
-            <option value="">{a.categoryPlaceholder}</option>
-            {categories.map(cat => <option key={cat} value={cat}>{cat}</option>)}
-          </select>
+          {catError
+            ? <p className="feedback feedback--error">{catError}</p>
+            : (
+              <select
+                value={form.category}
+                onChange={e => updateField('category', e.target.value)}
+                disabled={isLoading || !form.type || categoryList.length === 0}
+                className={`form-input${!form.category ? ' form-input--unselected' : ''}`}
+              >
+                <option value="">{a.categoryPlaceholder}</option>
+                {categoryList.map(cat => <option key={cat} value={cat}>{cat}</option>)}
+              </select>
+            )
+          }
         </Field>
 
         <Field label={a.notesLabel}>
@@ -192,4 +205,3 @@ export default function AddTransaction() {
     </div>
   );
 }
-
